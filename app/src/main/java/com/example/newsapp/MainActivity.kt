@@ -4,6 +4,7 @@ package com.example.newsapp
 import android.content.Intent
 
 import android.os.Bundle
+import android.util.Log
 
 import androidx.appcompat.app.AppCompatActivity
 
@@ -108,6 +109,7 @@ class MainActivity : AppCompatActivity() {
                 news.description = newsDetail.description.toString()
 
                 db.newsDataQueries().saveNews(news)
+//
 
           }
             thread.start()
