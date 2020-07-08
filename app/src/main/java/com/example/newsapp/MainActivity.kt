@@ -2,20 +2,35 @@ package com.example.newsapp
 
 
 import android.content.Intent
+
 import android.os.Bundle
+
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
+
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import androidx.recyclerview.widget.RecyclerView
+
+import androidx.room.Room
+
 import retrofit2.Call
+
 import retrofit2.Callback
+
 import retrofit2.Response
+
 import retrofit2.Retrofit
+
 import retrofit2.converter.gson.GsonConverterFactory
-import android.hardware.SensorManager.getOrientation
+
+
+var starClicked: Boolean = false
 
 
 class MainActivity : AppCompatActivity() {
+
+    var db = Room.databaseBuilder(applicationContext,AppDatabase::class.java,"NewsDB").build()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -58,18 +73,13 @@ class MainActivity : AppCompatActivity() {
                                 newsArray.add(DataModel(article.title, article.description))
                             }
 
-                            // getting recyclerview from xml
-
                             val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-
-                           // recyclerView.layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
 
                             recyclerView.layoutManager = LinearLayoutManager (this@MainActivity)
 
                             recyclerView.setHasFixedSize (true)
 
-                            recyclerView.adapter = CustomAdapter(newsArray) { newsDetail ->  newsItemClicked( newsDetail ) }
-
+                            recyclerView.adapter = CustomAdapter(newsArray)  {newsDetail -> newsItemClicked( newsDetail )}
 
                     }
                 }
@@ -87,11 +97,29 @@ class MainActivity : AppCompatActivity() {
 
     private fun newsItemClicked( newsDetail: DataModel ) {
 
-        val intent = Intent(this, NewsDetails::class.java)
+        if (starClicked == true) {
 
-        intent.putExtra("desc", newsDetail.description)
+            val thread = Thread {
 
-        startActivity(intent)
+                var news = NewsEntity()
+
+                news.title = newsDetail.title.toString()
+
+                news.description = newsDetail.description.toString()
+
+                db.newsDataQueries().saveNews(news)
+
+          }
+            thread.start()
+        }
+        else {
+
+            val intent = Intent(this, NewsDetails::class.java)
+
+            intent.putExtra("desc", newsDetail.description)
+
+            startActivity(intent)
+        }
     }
 
 

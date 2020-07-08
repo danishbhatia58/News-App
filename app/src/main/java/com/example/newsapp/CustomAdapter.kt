@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 
 import android.view.ViewGroup
+import android.widget.Button
 
 import android.widget.TextView
 
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 //
 
 class CustomAdapter(val userList: ArrayList<DataModel> , val clickListener: (DataModel)-> Unit )  : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+
 
     //this method is returning the view for each item in the list
 
@@ -53,9 +55,19 @@ class CustomAdapter(val userList: ArrayList<DataModel> , val clickListener: (Dat
 
             val textViewAddress  = itemView.findViewById(R.id.textViewAddress) as TextView
 
+            val buttonStar = itemView.findViewById(R.id.buttonStar) as Button
+
+
             textViewName.text = article.title
 
             textViewAddress.text = article.description
+
+
+            buttonStar.setOnClickListener {
+
+                starClicked = true
+            }
+
 
             itemView.setOnClickListener { clickListener(article)}
         }

@@ -8,6 +8,6 @@ import  retrofit2.Call
 
 interface NewsService {
 
-    @GET("v2/everything?q=bitcoin&from=2020-07-07&sortBy=publishedAt&apiKey=8ded7689bd9146398d1f2edda6bd4bf6")
+    @GET("v2/everything?q=bitcoin&from=2020-07-08&sortBy=publishedAt&apiKey=8ded7689bd9146398d1f2edda6bd4bf6")
     fun getNewsData(): Call<NewsResponse>
 }
