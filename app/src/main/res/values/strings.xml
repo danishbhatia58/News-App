@@ -12,4 +12,5 @@
 
     <string name="api_key">8ded7689bd9146398d1f2edda6bd4bf6</string>
     <string name="title_activity_news_details">NewsDetails</string>
+    <string name="title_activity_favorite">FavoriteActivity</string>
 </resources>

@@ -2,35 +2,27 @@ package com.example.newsapp
 
 
 import android.content.Intent
-
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.Button
 
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import androidx.recyclerview.widget.RecyclerView
 
-import androidx.room.Room
-
 import retrofit2.Call
-
 import retrofit2.Callback
-
 import retrofit2.Response
-
 import retrofit2.Retrofit
-
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-var starClicked: Boolean = false
-
+var pageCheck: Boolean = true
 
 class MainActivity : AppCompatActivity() {
-
-    var db = Room.databaseBuilder(applicationContext,AppDatabase::class.java,"NewsDB").build()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +30,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        pageCheck = true // If Main Activity opens
+
+        var favBtn = (findViewById(R.id.favoriteButton) ) as Button
+
+
+        favBtn.setOnClickListener {
+
+            val intent = Intent(this, FavoriteActivity::class.java)
+
+            startActivity(intent)
+        }
 
 
         // API Tasks
@@ -63,16 +67,6 @@ class MainActivity : AppCompatActivity() {
 
                             val newsResponse = response.body()!!
 
-                            val newsArray = ArrayList<DataModel>()
-
-
-                            println(newsResponse.articles + "Articles List")
-
-
-                            for (article in newsResponse.articles) {
-
-                                newsArray.add(DataModel(article.title, article.description))
-                            }
 
                             val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
@@ -80,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
                             recyclerView.setHasFixedSize (true)
 
-                            recyclerView.adapter = CustomAdapter(newsArray)  {newsDetail -> newsItemClicked( newsDetail )}
+                            recyclerView.adapter = CustomAdapter(newsResponse.articles)  {newsDetail -> newsItemClicked( newsDetail )}
 
                     }
                 }
@@ -98,30 +92,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun newsItemClicked( newsDetail: DataModel ) {
 
-        if (starClicked == true) {
+        val intent = Intent(this, NewsDetails::class.java)
 
-            val thread = Thread {
+        intent.putExtra("desc", newsDetail.description)
 
-                var news = NewsEntity()
-
-                news.title = newsDetail.title.toString()
-
-                news.description = newsDetail.description.toString()
-
-                db.newsDataQueries().saveNews(news)
-//
-
-          }
-            thread.start()
-        }
-        else {
-
-            val intent = Intent(this, NewsDetails::class.java)
-
-            intent.putExtra("desc", newsDetail.description)
-
-            startActivity(intent)
-        }
+        startActivity(intent)
     }
 
 
@@ -129,6 +104,8 @@ class MainActivity : AppCompatActivity() {
 
         var BaseUrl = "http://newsapi.org/"
     }
+
+
 
 }
 

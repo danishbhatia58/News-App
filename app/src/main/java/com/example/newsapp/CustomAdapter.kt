@@ -13,6 +13,9 @@ import android.widget.Button
 import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import kotlinx.android.synthetic.main.activity_main.*
+
 //
 
 class CustomAdapter(val userList: ArrayList<DataModel> , val clickListener: (DataModel)-> Unit )  : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
@@ -65,7 +68,33 @@ class CustomAdapter(val userList: ArrayList<DataModel> , val clickListener: (Dat
 
             buttonStar.setOnClickListener {
 
-                starClicked = true
+                val thread = Thread {
+
+                    var news = NewsEntity()
+
+                    news.title = article.title.toString()
+
+                    news.description = article.description.toString()
+
+
+                    var db =
+                        Room.databaseBuilder(itemView.context, AppDatabase::class.java, "NewsDB")
+                            .build()
+
+                    println("______" + pageCheck.toString() + "_________________")
+
+                    if (pageCheck) {
+
+                        db.newsDataQueries().saveNews(news)
+                    }
+                    else {
+
+                        db.newsDataQueries().deleteByTitle(news.title)
+                        
+                    }
+
+                }
+                thread.start()
             }
 
 
