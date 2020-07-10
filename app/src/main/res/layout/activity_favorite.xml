@@ -22,6 +22,8 @@
 
     <include layout="@layout/content_favorite" />
 
+
+
     <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/recyclerViewFav"

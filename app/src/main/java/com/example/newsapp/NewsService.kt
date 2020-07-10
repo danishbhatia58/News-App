@@ -2,9 +2,8 @@ package com.example.newsapp
 
 import  retrofit2.http.GET
 
-import retrofit2.http.Query
-
 import  retrofit2.Call
+
 
 interface NewsService {
 

@@ -8,18 +8,23 @@ import android.view.LayoutInflater
 import android.view.View
 
 import android.view.ViewGroup
-import android.widget.Button
+
+import android.widget.ImageButton
 
 import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import kotlinx.android.synthetic.main.activity_main.*
 
-//
+import androidx.room.Room
+
+import com.squareup.picasso.Picasso
+
+import kotlinx.android.synthetic.main.list_layout.view.*
+
+import java.util.concurrent.TimeUnit
+
 
 class CustomAdapter(val userList: ArrayList<DataModel> , val clickListener: (DataModel)-> Unit )  : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
-
 
     //this method is returning the view for each item in the list
 
@@ -58,12 +63,20 @@ class CustomAdapter(val userList: ArrayList<DataModel> , val clickListener: (Dat
 
             val textViewAddress  = itemView.findViewById(R.id.textViewAddress) as TextView
 
-            val buttonStar = itemView.findViewById(R.id.buttonStar) as Button
-
+            val buttonStar = itemView.findViewById(R.id.buttonStar) as ImageButton
 
             textViewName.text = article.title
 
-            textViewAddress.text = article.description
+            if (pageCheck == false){
+
+                buttonStar.setImageResource(android.R.drawable.ic_delete)
+            }
+
+
+            textViewAddress.text = "" // article.description
+
+
+            Picasso.get().load(article.urlToImage).into(itemView.imageVw)
 
 
             buttonStar.setOnClickListener {
@@ -76,21 +89,33 @@ class CustomAdapter(val userList: ArrayList<DataModel> , val clickListener: (Dat
 
                     news.description = article.description.toString()
 
+                    news.url = article.urlToImage.toString()
+
 
                     var db =
                         Room.databaseBuilder(itemView.context, AppDatabase::class.java, "NewsDB")
                             .build()
 
-                    println("______" + pageCheck.toString() + "_________________")
 
                     if (pageCheck) {
 
                         db.newsDataQueries().saveNews(news)
+
+                        itemView.buttonStar.setImageResource(android.R.drawable.star_off)
                     }
                     else {
 
                         db.newsDataQueries().deleteByTitle(news.title)
-                        
+
+                        TimeUnit.SECONDS.sleep(3L)
+
+
+                        val i = Intent(itemView.context, FavoriteActivity::class.java)
+
+                        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK //add this line
+
+                        itemView.context.startActivity(i)
+
                     }
 
                 }
@@ -100,7 +125,6 @@ class CustomAdapter(val userList: ArrayList<DataModel> , val clickListener: (Dat
 
             itemView.setOnClickListener { clickListener(article)}
         }
-
 
     }
 

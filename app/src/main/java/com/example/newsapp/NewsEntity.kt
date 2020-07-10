@@ -20,4 +20,7 @@ class NewsEntity {
     @ColumnInfo(name = "description")
     var description: String = ""
 
+    @ColumnInfo(name= "url")
+    var url: String = ""
+
 }

@@ -2,25 +2,30 @@ package com.example.newsapp
 
 
 import android.content.Intent
+
 import android.os.Bundle
-import android.view.View
+
 import android.widget.Button
 
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import androidx.recyclerview.widget.RecyclerView
 
 import retrofit2.Call
+
 import retrofit2.Callback
+
 import retrofit2.Response
+
 import retrofit2.Retrofit
+
 import retrofit2.converter.gson.GsonConverterFactory
 
 
 var pageCheck: Boolean = true
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +36,11 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        setSupportActionBar(findViewById(R.id.toolbarId))
+
+
         pageCheck = true // If Main Activity opens
+
 
         var favBtn = (findViewById(R.id.favoriteButton) ) as Button
 
@@ -51,13 +60,9 @@ class MainActivity : AppCompatActivity() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-
         val service = retrofit.create(NewsService::class.java)
 
         val call = service.getNewsData()
-
-        println("_____________________________________")
-
 
             call.enqueue(object : Callback<NewsResponse> {
 
@@ -90,6 +95,16 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onRestart() {
+
+        super.onRestart()
+
+        finish()
+
+        startActivity(getIntent())
+    }
+
+
     private fun newsItemClicked( newsDetail: DataModel ) {
 
         val intent = Intent(this, NewsDetails::class.java)
@@ -104,8 +119,6 @@ class MainActivity : AppCompatActivity() {
 
         var BaseUrl = "http://newsapi.org/"
     }
-
-
 
 }
 
