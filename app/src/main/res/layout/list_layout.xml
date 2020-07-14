@@ -14,7 +14,7 @@
 
         android:layout_height="wrap_content"
 
-        android:layout_margin="5dp">
+        android:layout_margin="@dimen/card_view_margin">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -32,20 +32,20 @@
 
                     android:id="@+id/imageVw"
 
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/list_image_width"
 
-                    android:layout_height="100dp"/>
+                    android:layout_height="@dimen/list_image_height"/>
 
                 <TextView
                     android:id="@+id/textViewUsername"
 
-                    android:layout_width="250dp"
+                    android:layout_width="@dimen/list_text1_width"
 
                     android:layout_height="wrap_content"
 
-                    android:padding="5dp"
+                    android:padding="@dimen/list_text1_padding"
 
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/list_text1_margin_left"
 
                     android:layout_toRightOf="@+id/imageVw"
 
@@ -58,7 +58,7 @@
 
                     android:layout_height="wrap_content"
 
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="@dimen/list_image_button_margin_left"
 
                     android:layout_toRightOf="@+id/textViewUsername"
 
@@ -68,17 +68,17 @@
                 <TextView
                     android:id="@+id/textViewAddress"
 
-                    android:layout_width="300dp"
+                    android:layout_width="@dimen/list_text2_width"
 
                     android:layout_height="wrap_content"
 
-                    android:padding="5dp"
+                    android:padding="@dimen/list_text2_padding"
 
-                    android:paddingTop="10dp"
+                    android:paddingTop="@dimen/list_text2_padding_top"
 
                     android:layout_below="@+id/linlayoutId"
 
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="@dimen/list_text2_margin_bottom"
 
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 

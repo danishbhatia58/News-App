@@ -1,3 +1,37 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+
+    <dimen name="card_view_margin">5dp</dimen>
+
+    <dimen name="list_image_height">100dp</dimen>
+
+    <dimen name="list_image_width">100dp</dimen>
+
+    <dimen name="list_text1_width">250dp</dimen>
+
+    <dimen name="list_text1_padding">5dp</dimen>
+
+    <dimen name="list_text1_margin_left">5dp</dimen>
+
+    <dimen name="list_image_button_margin_left">20dp</dimen>
+
+    <dimen name="list_text2_width">300dp</dimen>
+
+    <dimen name="list_text2_padding">5dp</dimen>
+
+    <dimen name="list_text2_padding_top">10dp</dimen>
+
+    <dimen name="list_text2_margin_bottom">20dp</dimen>
+
+
+    <dimen name="main_favorite_button_text_size">15sp</dimen>
+
+
+    <dimen name="news_details_text_padding">10dp</dimen>
+
+
+    <dimen name="content_main_fragment_height">0dp</dimen>
+
+    <dimen name="content_main_fragment_width">0dp</dimen>
 </resources>

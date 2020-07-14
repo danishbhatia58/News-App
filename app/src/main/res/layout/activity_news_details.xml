@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
-    tools:context=".NewsDetails">
+
+    tools:context=".activities.NewsDetails">
 
     <include layout="@layout/content_news_details" />
 
     <TextView
         android:id="@+id/descriptionText"
+
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text=""
+
+        android:padding="@dimen/news_details_text_padding"
+
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
          />
 

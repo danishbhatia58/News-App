@@ -10,7 +10,11 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
-    <string name="api_key">8ded7689bd9146398d1f2edda6bd4bf6</string>
     <string name="title_activity_news_details">NewsDetails</string>
     <string name="title_activity_favorite">FavoriteActivity</string>
+
+
+    <string name="favorite_button_title">Favorites</string>
+
+
 </resources>

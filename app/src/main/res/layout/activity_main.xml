@@ -13,7 +13,7 @@
 
     android:layout_height="wrap_content"
 
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
 
@@ -52,9 +52,9 @@
 
             android:clickable="true"
 
-            android:textSize="15sp"
+            android:textSize="@dimen/main_favorite_button_text_size"
 
-            android:text="Favorites" />
+            android:text="@string/favorite_button_title" />
 
         </androidx.appcompat.widget.Toolbar>
 

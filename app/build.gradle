@@ -28,6 +28,23 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    sourceSets {
+
+        main {
+
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/activity_ui',
+                            'src/main/res/layouts/content_ui',
+                            'src/main/res/layouts/fragments_ui',
+                            'src/main/res/layouts/adapter_ui',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
+
+
 
     buildTypes {
 
