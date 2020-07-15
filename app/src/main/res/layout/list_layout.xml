@@ -58,6 +58,8 @@
 
                     android:layout_height="wrap_content"
 
+                    android:background="@color/white"
+
                     android:layout_marginLeft="@dimen/list_image_button_margin_left"
 
                     android:layout_toRightOf="@+id/textViewUsername"
