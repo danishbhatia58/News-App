@@ -4,6 +4,8 @@ import android.content.Intent
 
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.View
+import android.widget.ProgressBar
 
 import androidx.appcompat.app.AppCompatActivity
 
@@ -37,8 +39,13 @@ class FavoriteActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.toolbarFavId))
 
+        val progressBar: ProgressBar = findViewById(R.id.progressBar2)
+
+
         pageCheck = false  // If Fav activity opens
 
+
+        progressBar.visibility = View.VISIBLE
 
 
         // ---VARIABLES DECLARATION---
@@ -51,7 +58,9 @@ class FavoriteActivity : AppCompatActivity() {
 
         var thread = Thread {
 
-             for (news in  Singleton.dbObject(this).getAllNews() ){
+             for (news in  Singleton.dbObject(this).getFavoriteNews() ){
+
+                 println("______" + news.ifFavorite.toString())
 
                  newsList.add(DataModel(news.title,news.description,news.url))
              }
@@ -72,6 +81,11 @@ class FavoriteActivity : AppCompatActivity() {
                 }
 
             Singleton.notifyAdapter(recyclerView)
+
+            progressBar.visibility = View.GONE
+        }
+        else{
+            println("____________No News")
         }
     }
 

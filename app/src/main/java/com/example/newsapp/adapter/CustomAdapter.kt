@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import android.widget.ImageButton
+import android.widget.ProgressBar
 
 import android.widget.TextView
 
@@ -29,6 +30,7 @@ import com.example.newsapp.api.DataModel
 import com.example.newsapp.database.NewsEntity
 
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 import kotlinx.android.synthetic.main.list_layout.view.*
 
@@ -97,12 +99,16 @@ class CustomAdapter(val userList: ArrayList<DataModel>, val clickListener: (Data
 
                 news.url = article.urlToImage.toString()
 
+                news.ifFavorite = 1
+
 
                 val thread = Thread {
 
                     if (pageCheck) {
 
                         Singleton.dbObject(itemView.context).saveNews(news)
+
+                        Singleton.setTimer()
 
                         itemView.buttonStar.setImageResource(android.R.drawable.star_off)
                     }

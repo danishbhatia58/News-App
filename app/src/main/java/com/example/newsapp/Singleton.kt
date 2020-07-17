@@ -1,6 +1,11 @@
 package com.example.newsapp
 
 import android.content.Context
+import android.os.Build
+import android.preference.PreferenceGroup
+import android.view.View
+import android.widget.ProgressBar
+import androidx.annotation.RequiresApi
 
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -14,6 +19,8 @@ import com.example.newsapp.database.NewsDataQueries
 import retrofit2.Retrofit
 
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDateTime
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -57,6 +64,19 @@ class Singleton {
 
             TimeUnit.SECONDS.sleep(1L)
         }
+
+        fun getCurrentTime(): LocalDateTime {
+
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                LocalDateTime.now()
+            }
+            else {
+
+                TODO("VERSION.SDK_INT < O")
+            }
+        }
+
 
     }
 }

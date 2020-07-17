@@ -24,4 +24,9 @@ class NewsEntity {
     @ColumnInfo(name= StringConstants.url)
     var url: String = StringConstants.emptyString
 
+    @ColumnInfo(name = StringConstants.ifFavorite)
+    var ifFavorite: Int = 2 // false
+
 }
+
+
